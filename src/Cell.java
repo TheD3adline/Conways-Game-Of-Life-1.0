@@ -9,6 +9,27 @@ public class Cell {
         this.alive = alive;
     }
 
+    public void checkNextCellStatus() {
+        aliveLastRound = alive;
+        if(!alive) {
+            if(neighbours == 3) {
+                aliveNextRound = true;
+            }
+        } else {
+            if(neighbours < 2) {
+                aliveNextRound = false;
+            } else if(neighbours == 2 || neighbours == 3) {
+                aliveNextRound = true;
+            } else if(neighbours > 3) {
+                aliveNextRound = false;
+            }
+        }
+    }
+
+    public void update() {
+        alive = aliveNextRound;
+    }
+
     public boolean isAlive() {
         return alive;
     }
