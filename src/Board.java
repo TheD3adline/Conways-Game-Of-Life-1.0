@@ -11,17 +11,37 @@ public class Board {
         gen = 1;
         for(int y = 0; y < fields.length; y++) {
             for(int x = 0; x < fields[0].length; x++) {
-                fields[y][x] =  new Cell(false);
+                if(Math.random() < 0.2) {
+                    fields[y][x] =  new Cell(true);
+                } else {
+                    fields[y][x] =  new Cell(false);
+                }
             }
         }
     }
 
     public void run() throws InterruptedException {
         while(true) {
-            //draw();
+            draw();
             update();
             gen += 1;
-            Thread.sleep(100);
+            Thread.sleep(700);
+        }
+    }
+
+    private void draw() {
+        System.out.println();
+        System.out.println();
+        for(int y = 0; y < fields.length; y++) {
+            for(int x = 0; x < fields[0].length; x++) {
+                if(fields[y][x].isAlive()) {
+                    System.out.print(charAlive + "");
+                } else {
+                    System.out.print(charDead + "");
+                }
+                System.out.print(" ");
+            }
+            System.out.println();
         }
     }
 
