@@ -9,9 +9,9 @@ public class Board {
     public Board(int height, int width) {
         fields = new Cell[height][width];
         gen = 1;
-        for(int i = 0; i < fields[0].length; i++) {
-            for(int j = 0; j < fields.length; j++) {
-                fields[j][i] =  new Cell(false);
+        for(int y = 0; y < fields.length; y++) {
+            for(int x = 0; x < fields[0].length; x++) {
+                fields[y][x] =  new Cell(false);
             }
         }
     }
@@ -26,34 +26,34 @@ public class Board {
     }
 
     public void update() {
-        for(int i = 0; i < fields[0].length; i++) {
-            for(int j = 0; j < fields.length; j++) {
-                countAliveNeighbourCells(j, i);
-                fields[j][i].checkNextCellStatus();
+        for(int y = 0; y < fields.length; y++) {
+            for(int x = 0; x < fields[0].length; x++) {
+                countAliveNeighbourCells(y, x);
+                fields[y][x].checkNextCellStatus();
             }
         }
-        for(int i = 0; i < fields[0].length; i++) {
-            for(int j = 0; j < fields.length; j++) {
-                fields[j][i].update();
+        for(int y = 0; y < fields.length; y++) {
+            for(int x = 0; x < fields[0].length; x++) {
+                fields[y][x].update();
             }
         }
     }
 
-    private void countAliveNeighbourCells(int jPos, int iPos) {
+    private void countAliveNeighbourCells(int yPos, int xPos) {
         int counter = 0;
-        for(int i = iPos - 1; i < iPos + 2; i++) {
-            for(int j = jPos - 1; j < jPos + 2; j++) {
-                if(j == jPos && i == iPos) {
+        for(int y = yPos - 1; y < yPos + 2; y++) {
+            for(int x = xPos - 1; x < xPos + 2; x++) {
+                if(y == yPos && x == xPos) {
                     continue;
                 }
-                if((j >= 0 && j < fields.length) && (i >= 0 && i < fields[0].length)) {
-                    if(fields[j][i].isAlive()) {
+                if((y >= 0 && y < fields.length) && (x >= 0 && x < fields[0].length)) {
+                    if(fields[y][x].isAlive()) {
                         counter++;
                     }
                 }
             }
         }
-        fields[jPos][iPos].setNeighbours(counter);
+        fields[yPos][xPos].setNeighbours(counter);
     }
 
     public Cell[][] getFields() {
