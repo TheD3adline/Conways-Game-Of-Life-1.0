@@ -25,19 +25,17 @@ public class Board {
             draw();
             update();
             gen += 1;
-            Thread.sleep(700);
+            Thread.sleep(100);
         }
     }
 
     private void draw() {
-        System.out.println();
-        System.out.println();
         for(int y = 0; y < fields.length; y++) {
             for(int x = 0; x < fields[0].length; x++) {
                 if(fields[y][x].isAlive()) {
                     System.out.print(charAlive + "");
                 } else {
-                    System.out.print(charDead + "");
+                    System.out.print("\u001b[38;5;59m" + charDead + ""  + "\u001B[0m");
                 }
                 System.out.print(" ");
             }
